@@ -1,0 +1,28 @@
+{
+  "name": "Elektronic signature",
+  "description": "Elektronic signature Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Elektronic signature"
+  },
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./static/js/content.js"]
+    }
+  ],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "optional_host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "./static/js/background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "tabs"]
+}
