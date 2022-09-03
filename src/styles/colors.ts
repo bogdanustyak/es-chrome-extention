@@ -1,0 +1,41 @@
+const colors = {
+  white: '#FFFFFF',
+  black: '#000000',
+  primaryButton: '#04cd3e',
+  blue: '#64b5da',
+  kariusTeal: '#10A8A7',
+  kariusBlue: '#233257',
+  lightKariusBlue: '#2332574d',
+  /**
+   * Use for links
+   * */
+  kariusOrange: '#F15C22',
+  kariusDarkGray: '#525D68',
+  negative: '#ee4e3e',
+  darkGray: '#525C68',
+  backgroundColor: '#F0F2F3',
+  textColor: '#575757',
+  lighterTextColor: '#747474',
+  darkerTextColor: '#303030',
+  greenTextColor: '#11a8a7',
+  green: '#04cd3e',
+  orderItemBackground: '#FEFFFF',
+  midGray: '#9CA1A5',
+  delimiter: '#e1e4e5',
+  mediumDarkGray: '#787B7D',
+  touchableHighlightColor: '#DDDDDD',
+  blueLink: '#2cb8e2',
+  lightGray: '#F9F9F9',
+  purpleTagColor: 'rgba(135, 51, 132, 1)',
+  gray: '#E9E9E9',
+  skinGreen: '#337887',
+  oralViolet: '#3F3387',
+  gutViolet: '#873384',
+  red: '#FF0000',
+  pink: '#F1ACAC',
+  grayCardBackground: '#f4f4f4',
+  messageMint: '#65CCB8',
+  messageGray: '#E9E9E9',
+};
+
+export default colors;

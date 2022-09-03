@@ -1,11 +1,11 @@
 {
-  "name": "Elektronic signature",
-  "description": "Elektronic signature Extension",
+  "name": "Karius elektronic signature",
+  "description": "Karius elektronic signature extension",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
-    "default_title": "Elektronic signature"
+    "default_title": "Karius elektronic signature"
   },
   "icons": {
     "16": "logo192.png",
@@ -15,7 +15,8 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["./static/js/content.js"]
+      "js": ["./static/js/content.js"],
+      "run_at": "document_idle"
     }
   ],
   "host_permissions": ["http://*/*", "https://*/*"],
@@ -24,5 +25,11 @@
     "service_worker": "./static/js/background.js",
     "type": "module"
   },
-  "permissions": ["storage", "activeTab", "scripting", "tabs"]
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ]
 }

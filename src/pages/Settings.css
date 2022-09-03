@@ -1,0 +1,29 @@
+.form-block {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.urls-block {
+    display: flex;
+    margin: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.form-label {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.url-item-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.submit-url-button {
+    margin-left: 10pt;
+    margin-right: 10pt;
+}

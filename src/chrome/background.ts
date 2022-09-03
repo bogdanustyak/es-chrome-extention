@@ -1,16 +1,27 @@
 export {};
 
 function subscribeToFormSubmits() {
-  function handleSubmit() {
-    const { body } = document;
-
-    chrome.storage.sync.set({ body: JSON.stringify(body) }, function () {
-      console.log('saved');
-    });
-  }
-
-  var form = document.querySelector('form');
-  form?.addEventListener('submit', handleSubmit, false);
+  // const forms = document.forms;
+  // for (let i = 0; i < forms.length; i++) {
+  //   const form = forms[i];
+  //   form.addEventListener('submit', function (event: any) {
+  //     event.preventDefault();
+  //     //const data = document.documentElement.outerHTML;
+  //     chrome.storage.local.set({ body: form.innerHTML }, function () {
+  //       console.log('saved');
+  //     });
+  //     // fetch(form.action, { method: 'post', body: new FormData(form) })
+  //     //   .then((resp) => {
+  //     //     return resp.json(); // or resp.text() or whatever the server sends
+  //     //   })
+  //     //   .then((body) => {
+  //     //     // TODO handle body
+  //     //   })
+  //     //   .catch((error) => {
+  //     //     // TODO handle error
+  //     //   });
+  //   });
+  //}
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
