@@ -6,11 +6,16 @@ import { readFromStorage, saveToStorage } from '../storage';
 import { ChromeMessage, Sender } from '../types';
 import './Settings.css';
 
+export interface Site {
+  url: string;
+  date: Date;
+}
+
 export interface UserSettings {
   urls: string[];
 }
 
-const PageItem = ({
+const UrlCell = ({
   url,
   onDelete,
 }: {
@@ -81,7 +86,7 @@ export const Settings = () => {
       },
     });
 
-    setList(urls.reverse());
+    setList(urls);
   };
 
   const UrlsForm = () => {
@@ -133,9 +138,7 @@ export const Settings = () => {
         title={`Urls [${list.length}]:`}
         list={list}
         onClearAll={clearAll}
-        cellRenderer={(elem) => (
-          <PageItem key={elem} url={elem} onDelete={remove} />
-        )}
+        cellRenderer={(elem) => <UrlCell url={elem} onDelete={remove} />}
       />
     </>
   );

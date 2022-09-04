@@ -1,49 +1,49 @@
 @font-face {
   font-family: 'MuseoSans';
   src: url(./assets/fonts/MuseoSans-100.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-100_Italic.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-300.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-300_Italic.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-500.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-500_Italic.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-700.otf) format('otf'),
-       url(./assets/fonts/MuseoSans-700_Italic.otf) format('otf');
+    url(./assets/fonts/MuseoSans-100_Italic.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-300.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-300_Italic.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-500.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-500_Italic.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-700.otf) format('otf'),
+    url(./assets/fonts/MuseoSans-700_Italic.otf) format('otf');
 }
 
-html, body {
+html,
+body {
   width: 400px;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 1;
   font-family: 'MuseoSans';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F9F9F9;
-}
-
-code {
-  font-family: 'MuseoSans';
+  background-color: #f9f9f9;
 }
 
 button {
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #233257;
   box-shadow: 8px 8px 20px rgba(35, 50, 87, 0.4);
   border-radius: 22px;
 }
 
-input[type="submit"] {
-  color: #FFFFFF;
+input[type='submit'] {
+  color: #ffffff;
   background-color: #233257;
   box-shadow: 8px 8px 20px rgba(35, 50, 87, 0.4);
   border-radius: 22px;
 }
 
-input[type="text"] {
-  border: 1px solid #9CA1A5;
+input[type='text'] {
+  border: 1px solid #9ca1a5;
   border-radius: 22px;
 }
 
-input[type="checkbox"] {
-  border: 3px solid #787B7D;
+input[type='checkbox'] {
+  border: 3px solid #787b7d;
   border-radius: 5px;
 }
 
@@ -51,17 +51,17 @@ input[type="checkbox"] {
   font-size: medium;
 }
 
-input[type=checkbox]:before {
+input[type='checkbox']:before {
   display: block;
-  border: 3px solid #787B7D;
+  border: 3px solid #787b7d;
   border-radius: 5px;
   background-color: white;
 }
 
-input[type=checkbox]:checked:after {
+input[type='checkbox']:checked:after {
   display: block;
-  border: solid #11A8A7;
-  border-width: 0 2px 2px 0;    
+  border: solid #11a8a7;
+  border-width: 0 2px 2px 0;
 }
 
 hr.solid {
@@ -69,8 +69,6 @@ hr.solid {
 }
 
 .card {
-  display: flex;  
-  flex-direction: column;      
   margin: 5pt 10pt 5pt 10pt;
   padding: 10pt;
   background-color: #fff;

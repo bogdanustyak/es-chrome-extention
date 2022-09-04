@@ -9,11 +9,7 @@ export type Snapshot = {
   body: string;
 };
 
-export interface FormSnapshots {
-  snapshots: Snapshot[];
-}
-
-const SnapshotItem = ({
+const SnapshotCell = ({
   snapshot,
   onDelete,
 }: {
@@ -25,15 +21,19 @@ const SnapshotItem = ({
     <div className="card">
       <div className="snapshot-item_header">
         <h3>{page}</h3>
-        <p>{date}</p>
+        <span>{date}</span>
       </div>
       <div className="snapshot-item_body">
-        <p>{body}</p>
+        <span>{body}</span>
       </div>
       <button onClick={() => onDelete(snapshot)}>Delete</button>
     </div>
   );
 };
+
+export interface FormSnapshots {
+  snapshots: Snapshot[];
+}
 
 export const Snapshots = () => {
   const [list, setList] = useState<Snapshot[]>([]);
@@ -45,6 +45,10 @@ export const Snapshots = () => {
   const loadBodyContent = async () => {
     const data = await readFromStorage('snapshots');
     const snapshots = data.snapshots ?? [];
+    // sort snapshots by date desc
+    snapshots.sort((a: Snapshot, b: Snapshot) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 
     setList(snapshots);
   };
@@ -66,20 +70,13 @@ export const Snapshots = () => {
   };
 
   return (
-    <>
-      <ListComponent
-        title={`Snapshots [${list.length}]:`}
-        list={list}
-        onClearAll={clearAll}
-        cellRenderer={(elem) => (
-          <SnapshotItem
-            snapshot={elem}
-            onDelete={function (snapshot: Snapshot): void {
-              deleteSnapshot(snapshot);
-            }}
-          />
-        )}
-      />
-    </>
+    <ListComponent
+      title={`Snapshots [${list.length}]:`}
+      list={list}
+      onClearAll={clearAll}
+      cellRenderer={(elem) => (
+        <SnapshotCell snapshot={elem} onDelete={deleteSnapshot} />
+      )}
+    />
   );
 };

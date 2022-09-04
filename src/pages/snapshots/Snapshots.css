@@ -1,20 +1,17 @@
-.snapshots-list {
+.snapshot-item_header {
   display: flex;
   flex-direction: column;
-  margin-top: 10pt;
+  flex-wrap: wrap;
+}
+
+.snapshot-item_body {
   margin-bottom: 10pt;
 }
 
-.snapshot-item_header {    
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;    
-    background-color: #fff;
-}
-
-.snapshot-item_body {    
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    background-color: #fff;
+span {
+  display: inline-block;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
