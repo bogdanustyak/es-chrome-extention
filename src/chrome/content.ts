@@ -1,3 +1,4 @@
+import { UserSettings } from '../pages/Settings';
 import { Snapshot } from '../pages/snapshots/Snapshots';
 import { readFromStorage, saveToStorage } from '../storage';
 import { ChromeMessage, Sender } from '../types';
@@ -68,12 +69,11 @@ const collectInputs = () => {
         }
       }
 
-      const snapshot = {
+      saveData({
         page: document.URL,
         date: new Date().toUTCString(),
         body: data.join('&'),
-      };
-      saveData(snapshot);
+      });
 
       // TODO make an api call etc
       setTimeout(() => {
@@ -84,18 +84,16 @@ const collectInputs = () => {
   }
 };
 
-const subscribeToFormInputs = () => {
-  chrome.storage.local.get('userSettings', function (data) {
-    const { urls } = data.userSettings;
+const subscribeToFormInputs = async () => {
+  const data = await readFromStorage('userSettings');
+  const { pages } = data.userSettings as UserSettings;
 
-    const shouldSubscribe = true;
-    // urls &&
-    // urls.filter((elem: string) => elem.includes(document.location.hostname));
+  const currentUrl = window.location.href;
+  const shouldSubscribe = pages.find((page) => page.url === currentUrl);
 
-    if (shouldSubscribe) {
-      collectInputs();
-    }
-  });
+  if (shouldSubscribe) {
+    collectInputs();
+  }
 };
 
 const main = () => {

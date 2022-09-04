@@ -16,7 +16,8 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "js": ["./static/js/content.js"],
-      "run_at": "document_idle"
+      "run_at": "document_idle",
+      "match": "<all_urls>"
     }
   ],
   "host_permissions": ["http://*/*", "https://*/*"],
@@ -30,6 +31,7 @@
     "unlimitedStorage",
     "activeTab",
     "scripting",
-    "tabs"
+    "tabs",
+    "<all_urls>"
   ]
 }

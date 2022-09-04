@@ -6,35 +6,36 @@ import { readFromStorage, saveToStorage } from '../storage';
 import { ChromeMessage, Sender } from '../types';
 import './Settings.css';
 
-export interface Site {
+export interface Page {
   url: string;
   date: Date;
 }
 
 export interface UserSettings {
-  urls: string[];
+  pages: Page[];
 }
 
-const UrlCell = ({
-  url,
+const PageCell = ({
+  page,
   onDelete,
 }: {
-  url: string;
-  onDelete: (url: string) => void;
+  page: Page;
+  onDelete: (page: Page) => void;
 }) => {
+  const { url } = page;
   return (
     <div className="card">
       <div className="url-item-header">
         <h3>{url}</h3>
       </div>
-      <button onClick={() => onDelete(url)}>Delete</button>
+      <button onClick={() => onDelete(page)}>Delete</button>
     </div>
   );
 };
 
 export const Settings = () => {
   const [saveThisUrl, setSaveThisUrl] = useState(false);
-  const [list, setList] = useState<string[]>([]);
+  const [list, setList] = useState<Page[]>([]);
 
   useEffect(() => {
     loadData();
@@ -42,24 +43,26 @@ export const Settings = () => {
 
   const loadData = async () => {
     const data = await readFromStorage('userSettings');
-    const { urls } = data.userSettings;
+    const pages = data.userSettings.pages ?? [];
 
-    setList(urls ? urls : []);
+    setList(pages);
+
     getCurrentTabUrl((url) => {
-      setSaveThisUrl(urls.includes(url));
+      const isUrlSaved = pages.find((page: Page) => page.url === url);
+      setSaveThisUrl(isUrlSaved ? true : false);
     });
   };
 
   const clearAll = () => {
     updateSettings([]);
+    setSaveThisUrl(false);
   };
 
   const add = async (url: string) => {
     const data = await readFromStorage('userSettings');
-    const { urls } = data.userSettings ?? [];
-    const unique = Array.from(new Set([...urls, url]));
+    const pages = data.userSettings.pages ?? [];
 
-    await updateSettings(unique);
+    await updateSettings([...pages, { url, date: new Date() }]);
 
     getCurrentTabUId((tabId) => {
       const message: ChromeMessage = {
@@ -73,20 +76,20 @@ export const Settings = () => {
 
   const remove = async (elem: string) => {
     const data = await readFromStorage('userSettings');
-    const urls: string[] = data.userSettings.urls ?? [];
+    const pages: Page[] = data.userSettings.pages ?? [];
 
-    updateSettings(urls.filter((it) => it !== elem));
+    updateSettings(pages.filter((page: Page) => page.url !== elem));
     setSaveThisUrl(false);
   };
 
-  const updateSettings = async (urls: string[]) => {
+  const updateSettings = async (pages: Page[]) => {
+    setList(pages);
+
     await saveToStorage({
       userSettings: {
-        urls: urls,
+        pages,
       },
     });
-
-    setList(urls);
   };
 
   const UrlsForm = () => {
@@ -135,10 +138,12 @@ export const Settings = () => {
     <>
       <QuickSettings />
       <ListComponent
-        title={`Urls [${list.length}]:`}
+        title={`Pages [${list.length}]:`}
         list={list}
         onClearAll={clearAll}
-        cellRenderer={(elem) => <UrlCell url={elem} onDelete={remove} />}
+        cellRenderer={(elem) => (
+          <PageCell page={elem} onDelete={(page) => remove(page.url)} />
+        )}
       />
     </>
   );

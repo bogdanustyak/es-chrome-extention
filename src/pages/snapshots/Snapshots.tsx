@@ -45,10 +45,6 @@ export const Snapshots = () => {
   const loadBodyContent = async () => {
     const data = await readFromStorage('snapshots');
     const snapshots = data.snapshots ?? [];
-    // sort snapshots by date desc
-    snapshots.sort((a: Snapshot, b: Snapshot) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
 
     setList(snapshots);
   };
